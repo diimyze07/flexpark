@@ -3,11 +3,10 @@
 	$apiKey = urlencode('Mzk3OTY5NzIzMjQxMzg2YTQ4NTA3NjQ4NGU0YzQyNTU=');
 	
 	// Message details
-	$numbers = 7728079794;
+	$numbers = '7728079794';
 	$sender = urlencode('TXTLCL');
 	$message = rawurlencode('This is your message');
- 
-	$numbers = implode(',', $numbers);
+
  
 	// Prepare data for POST request
 	$data = array('apikey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
