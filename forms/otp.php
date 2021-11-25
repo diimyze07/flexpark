@@ -1,24 +1,25 @@
-<?php 
-if(isset($_POST['send_message']))
-{
- $curl_start = curl_init();
- $user_detail="Registerd Email:password";
- $receiver_no= $_POST['phone']; 
- $sender_id="This Is A Demo Message"; 
-//  $msg_txt= $_POST['message']; 
- curl_setopt($curl_start,CURLOPT_URL,  "http://api.mVaayoo.com/mvaayooapi/MessageCompose");
- curl_setopt($curl_start, CURLOPT_RETURNTRANSFER, 1);
- curl_setopt($curl_start, CURLOPT_POST, 1);
- curl_setopt($curl_start, CURLOPT_POSTFIELDS, "user=$user_detail&senderID=$sender_id&receipientno=$receiver_no");
- $buffer = curl_exec($curl_start);
- if(empty ($buffer))
- {
-  echo " buffer is empty "; 
- }
- else
- {
-  echo $buffer; 
- } 
- curl_close($curl_start);
-}
+<?php
+	// Account details
+	$apiKey = urlencode('Mzk3OTY5NzIzMjQxMzg2YTQ4NTA3NjQ4NGU0YzQyNTU=');
+	
+	// Message details
+	$numbers = $_POST['phone'];;
+	$sender = urlencode('TXTLCL');
+	$message = rawurlencode('This is your message');
+ 
+	$numbers = implode(',', $numbers);
+ 
+	// Prepare data for POST request
+	$data = array('apikey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
+ 
+	// Send the POST request with cURL
+	$ch = curl_init('https://api.textlocal.in/send/');
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$response = curl_exec($ch);
+	curl_close($ch);
+	
+	// Process your response here
+	echo $response;
 ?>
