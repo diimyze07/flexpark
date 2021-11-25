@@ -8,7 +8,7 @@
 
 	// Data for text message. This is the text message data.
 	$sender = "TXTLCL"; // This is who the message appears to be from.
-	$numbers = $_POST['phone']; // A single number or a comma-seperated list of numbers
+	$numbers = "917728079794"; // A single number or a comma-seperated list of numbers
 	$message = "This is a test message from the PHP API script.";
 	// 612 chars or less
 	// A single number or a comma-seperated list of numbers
