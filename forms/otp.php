@@ -1,24 +1,23 @@
 <?php
-	// Account details
-	$apiKey = urlencode('Mzk3OTY5NzIzMjQxMzg2YTQ4NTA3NjQ4NGU0YzQyNTU=');
-	
-	// Message details
-	$numbers = '7728079794';
-	$sender = urlencode('TXTLCL');
-	$message = rawurlencode('This is your message');
+	// Authorisation details.
+	$username = "virajmathur2002@gmail.com";
+	$hash = "26fe6f2520e894468e6393d9f17ba8f8f94fbe383ad41d8a74453923fb84073f";
 
- 
-	// Prepare data for POST request
-	$data = array('apikey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
- 
-	// Send the POST request with cURL
-	$ch = curl_init('https://api.textlocal.in/send/');
+	// Config variables. Consult http://api.textlocal.in/docs for more info.
+	$test = "0";
+
+	// Data for text message. This is the text message data.
+	$sender = "TXTLCL"; // This is who the message appears to be from.
+	$numbers = $_POST['phone']; // A single number or a comma-seperated list of numbers
+	$message = "This is a test message from the PHP API script.";
+	// 612 chars or less
+	// A single number or a comma-seperated list of numbers
+	$message = urlencode($message);
+	$data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+	$ch = curl_init('http://api.textlocal.in/send/?');
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$response = curl_exec($ch);
+	$result = curl_exec($ch); // This is the result from the API
 	curl_close($ch);
-	
-	// Process your response here
-	echo $response;
 ?>
